@@ -1,0 +1,188 @@
+// Глобальные стили. Стили компонентов — в самих .vue (<style scoped>).
+
+:root {
+  --bg: #f3f0ff;
+  --bg-2: #e9e3ff;
+  --surface: #ffffff;
+  --ink: #1d1534;
+  --ink-2: #4d4468;
+  --muted: #8a82a3;
+  --line: rgb(29 21 52 / 10%);
+  --line-strong: rgb(29 21 52 / 20%);
+  --accent: #7c5cff;
+  --accent-2: #ff6b8b;
+  --accent-ink: #fff;
+  --good: #fff1a8;
+  --bad: #ffd3df;
+  --ideas: #c9f2e3;
+  --radius: 18px;
+  --shadow: 0 1px 2px rgb(29 21 52 / 6%), 0 10px 30px -12px rgb(29 21 52 / 25%);
+  --shadow-lift: 0 2px 6px rgb(29 21 52 / 8%), 0 24px 50px -18px rgb(29 21 52 / 40%);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --gutter: clamp(16px, 4vw, 40px);
+  --font: 'Manrope Variable', system-ui, sans-serif;
+  --hand: 'Caveat', 'Comic Sans MS', cursive;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100svh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 1px 1px, rgb(124 92 255 / 16%) 1px, transparent 0) 0 0 / 22px 22px,
+    var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s,
+    border-color 0.2s,
+    background-color 0.2s;
+
+  &:hover {
+    border-color: var(--ink);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &--accent {
+    border-color: transparent;
+    background: var(--accent);
+    color: var(--accent-ink);
+    box-shadow: 0 10px 24px -10px var(--accent);
+
+    &:hover {
+      border-color: transparent;
+      box-shadow: 0 14px 30px -10px var(--accent);
+    }
+  }
+
+  &--ghost {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  &--sm {
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+  }
+}
+
+.field {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface);
+  font-weight: 600;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+
+  &:focus {
+    border-color: var(--accent);
+    outline: none;
+    box-shadow: 0 0 0 4px rgb(124 92 255 / 18%);
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

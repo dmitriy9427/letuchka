@@ -1,0 +1,19 @@
+# 07. Деплой
+
+Сайт статический: `nuxt generate` → `.output/public`, хостинг — GitHub Pages
+(`https://dmitriy9427.github.io/letuchka/`).
+
+`.github/workflows/pages.yml`:
+
+1. `npm ci`, тесты;
+2. сборка с `NUXT_APP_BASE_URL=/letuchka/` и ключами Supabase из **переменных
+   репозитория** (`vars.SUPABASE_URL`, `vars.SUPABASE_KEY`). Переменных нет —
+   соберётся демо-режим между вкладками;
+3. публикация `.output/public`.
+
+Прямые ссылки `/letuchka/r/abc12345` работают благодаря `404.html`: Pages
+отдаёт его на несуществующий файл, приложение загружается, роутер открывает
+комнату.
+
+Почему переменные, а не секреты: publishable-ключ всё равно окажется в
+JS-бандле. Секреты GitHub — для того, что в браузер не попадает.
