@@ -52,6 +52,8 @@ const CURSORS = [
 <style scoped lang="scss">
 .mini {
   position: relative;
+  // Контейнер для единиц cqw: маршруты курсоров — в долях ширины доски.
+  container-type: inline-size;
   padding: 18px;
   border-radius: 28px;
   background: var(--surface);
@@ -105,6 +107,25 @@ const CURSORS = [
   }
 }
 
+// Узкая доска (телефон 320–360 px): три колонки должны влезть. Длинные слова
+// («зависимостей») переносятся по слогам, шрифт и отступы — меньше.
+@container (width < 360px) {
+  .mini__cols {
+    gap: 6px;
+  }
+
+  .mini__col {
+    padding: 8px;
+  }
+
+  .mini__note {
+    padding: 8px 8px 18px;
+    font-size: 0.95rem;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+}
+
 @keyframes stick {
   from {
     opacity: 0;
@@ -155,33 +176,37 @@ const CURSORS = [
   }
 }
 
+// Маршруты курсоров — в процентах ширины доски (cqw), а не в пикселях.
+// Были пиксели под доску ~560 px на компьютере: на телефоне доска ~340 px,
+// и курсор с подписью «Макс» улетал за экран — появлялась прокрутка вбок.
+// Самая правая точка — 75cqw: курсор с подписью (~70 px) остаётся на доске.
 @keyframes path-a {
   0%,
   100% {
-    translate: 60px 90px;
+    translate: 11cqw 90px;
   }
 
   30% {
-    translate: 220px 160px;
+    translate: 39cqw 160px;
   }
 
   60% {
-    translate: 130px 270px;
+    translate: 23cqw 270px;
   }
 }
 
 @keyframes path-b {
   0%,
   100% {
-    translate: 380px 230px;
+    translate: 68cqw 230px;
   }
 
   40% {
-    translate: 300px 80px;
+    translate: 54cqw 80px;
   }
 
   70% {
-    translate: 420px 140px;
+    translate: 75cqw 140px;
   }
 }
 </style>

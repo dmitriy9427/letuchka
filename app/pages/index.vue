@@ -97,6 +97,9 @@ const STEPS = [
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     min-height: auto;
+    // Повёрнутая доска и её тень не должны давать прокрутку вбок.
+    // clip, а не hidden: не создаёт контейнер прокрутки.
+    overflow-x: clip;
   }
 }
 
