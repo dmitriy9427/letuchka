@@ -174,3 +174,25 @@ onMounted(() => dialog.value?.showModal())
 3. **Мутировать пропсы.** Как и в React — нельзя. Отправьте событие наверх.
 4. **Ждать, что DOM обновился сразу после присваивания.** Vue копит изменения
    и обновляет DOM пачкой в микрозадаче — используйте `await nextTick()`.
+
+## Попробуйте сами
+
+1. Перепишите на Vue: `const [count, setCount] = useState(0); const double = useMemo(() => count * 2, [count])`.
+2. В шаблоне `NoteCard.vue` найдите, как скрытая карточка показывает точки вместо текста. Почему
+   текст для скринридера — отдельной строкой?
+3. Почему после `editing.value = true` нужен `await nextTick()` перед `input.value?.focus()`?
+
+<details>
+<summary>Ответы</summary>
+
+1. ```ts
+   const count = ref(0)
+   const double = computed(() => count.value * 2)
+   ```
+   В шаблоне — `{{ count }}` и `{{ double }}` без `.value`.
+2. `card.text.replace(/\S/g, '•')` — каждый непробельный символ заменён точкой; строка
+   `aria-hidden`. Скринридеру — понятная фраза «Карточка Анны — откроется на этапе голосования»
+   вместо «точка точка точка».
+3. Vue обновляет DOM не сразу, а пачкой. До `nextTick` `<textarea>` ещё нет в DOM — фокусировать
+   нечего.
+</details>
